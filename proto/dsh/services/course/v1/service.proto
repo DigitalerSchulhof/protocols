@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package dsh.services.course.v1;
+
+import "dsh/services/course/v1/resources.proto";
+import "google/protobuf/field_mask.proto";
+
+service CourseService {
+  rpc ListCourses(ListCoursesRequest) returns (ListCoursesResponse);
+
+  rpc GetCourse(GetCourseRequest) returns (GetCourseResponse);
+
+  rpc BatchGetCourses(BatchGetCoursesRequest)
+      returns (BatchGetCoursesResponse);
+
+  rpc CreateCourse(CreateCourseRequest) returns (CreateCourseResponse);
+
+  rpc UpdateCourse(UpdateCourseRequest) returns (UpdateCourseResponse);
+
+  rpc DeleteCourse(DeleteCourseRequest) returns (DeleteCourseResponse);
+}
+
+message ListCoursesRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+  string filter = 3;
+  string order_by = 4;
+}
+
+message ListCoursesResponse {
+  repeated Course courses = 1;
+  string next_page_token = 2;
+}
+
+message GetCourseRequest { string id = 1; }
+
+message GetCourseResponse { Course course = 1; }
+
+message BatchGetCoursesRequest { repeated string ids = 1; }
+
+message BatchGetCoursesResponse { repeated Course courses = 1; }
+
+message CreateCourseRequest {
+  Course course = 1;
+  string class_id = 2;
+}
+
+message CreateCourseResponse { Course course = 1; }
+
+message UpdateCourseRequest {
+  Course course = 1;
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message UpdateCourseResponse { Course course = 1; }
+
+message DeleteCourseRequest { string id = 1; }
+
+message DeleteCourseResponse { Course course = 1; }

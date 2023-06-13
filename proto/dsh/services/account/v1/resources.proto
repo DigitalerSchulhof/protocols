@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package dsh.services.account.v1;
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+
+message Account {
+  // Output only
+  string id = 1;
+  // Output only
+  string rev = 2;
+  // Output only
+  google.protobuf.Timestamp updated_at = 3;
+  // Output only
+  google.protobuf.Timestamp created_at = 4;
+
+  // Output only
+  string person_id = 5;
+
+  string username = 6;
+  string email = 7;
+  string password = 8;
+  string salt = 9;
+  optional google.protobuf.Timestamp password_expires_at = 10;
+  optional google.protobuf.Timestamp last_login = 11;
+  optional google.protobuf.Timestamp second_last_login = 12;
+  AccountSettings settings = 13;
+}
+
+message AccountSettings {
+  NotifyOn email_on = 1;
+  NotifyOn push_on = 2;
+  ConsiderNews consider_news = 3;
+  Mailbox mailbox = 4;
+  Profile profile = 5;
+
+  message NotifyOn {
+    bool new_message = 1;
+    bool new_substitution = 2;
+    bool new_news = 3;
+  }
+
+  message ConsiderNews {
+    bool new_event = 1;
+    bool new_blog = 2;
+    bool new_gallery = 3;
+    bool file_changed = 4;
+  }
+
+  message Mailbox {
+    optional google.protobuf.Duration delete_after = 1;
+    optional google.protobuf.Duration delete_after_in_bin = 2;
+  }
+
+  message Profile {
+    google.protobuf.Duration session_timeout = 1;
+    FormOfAddress form_of_address = 2;
+  }
+
+  enum FormOfAddress {
+    FORM_OF_ADDRESS_UNSPECIFIED = 0;
+    FORM_OF_ADDRESS_FORMAL = 1;
+    FORM_OF_ADDRESS_INFORMAL = 2;
+  }
+}

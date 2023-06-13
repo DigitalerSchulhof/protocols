@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package dsh.services.session.v1;
+
+import "dsh/services/session/v1/resources.proto";
+import "google/protobuf/field_mask.proto";
+
+service SessionService {
+  rpc ListSessions(ListSessionsRequest) returns (ListSessionsResponse);
+
+  rpc GetSession(GetSessionRequest) returns (GetSessionResponse);
+
+  rpc BatchGetSessions(BatchGetSessionsRequest)
+      returns (BatchGetSessionsResponse);
+
+  rpc CreateSession(CreateSessionRequest) returns (CreateSessionResponse);
+
+  rpc UpdateSession(UpdateSessionRequest) returns (UpdateSessionResponse);
+
+  rpc DeleteSession(DeleteSessionRequest) returns (DeleteSessionResponse);
+}
+
+message ListSessionsRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+  string filter = 3;
+  string order_by = 4;
+}
+
+message ListSessionsResponse {
+  repeated Session sessions = 1;
+  string next_page_token = 2;
+}
+
+message GetSessionRequest { string id = 1; }
+
+message GetSessionResponse { Session session = 1; }
+
+message BatchGetSessionsRequest { repeated string ids = 1; }
+
+message BatchGetSessionsResponse { repeated Session sessions = 1; }
+
+message CreateSessionRequest {
+  Session session = 1;
+  string person_id = 2;
+}
+
+message CreateSessionResponse { Session session = 1; }
+
+message UpdateSessionRequest {
+  Session session = 1;
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message UpdateSessionResponse { Session session = 1; }
+
+message DeleteSessionRequest { string id = 1; }
+
+message DeleteSessionResponse { Session session = 1; }

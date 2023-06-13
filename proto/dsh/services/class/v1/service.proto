@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package dsh.services.class.v1;
+
+import "dsh/services/class/v1/resources.proto";
+import "google/protobuf/field_mask.proto";
+
+service ClassService {
+  rpc ListClasses(ListClassesRequest) returns (ListClassesResponse);
+
+  rpc GetClass(GetClassRequest) returns (GetClassResponse);
+
+  rpc BatchGetClasses(BatchGetClassesRequest)
+      returns (BatchGetClassesResponse);
+
+  rpc CreateClass(CreateClassRequest) returns (CreateClassResponse);
+
+  rpc UpdateClass(UpdateClassRequest) returns (UpdateClassResponse);
+
+  rpc DeleteClass(DeleteClassRequest) returns (DeleteClassResponse);
+}
+
+message ListClassesRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+  string filter = 3;
+  string order_by = 4;
+}
+
+message ListClassesResponse {
+  repeated Class classes = 1;
+  string next_page_token = 2;
+}
+
+message GetClassRequest { string id = 1; }
+
+message GetClassResponse { Class class = 1; }
+
+message BatchGetClassesRequest { repeated string ids = 1; }
+
+message BatchGetClassesResponse { repeated Class classes = 1; }
+
+message CreateClassRequest {
+  Class class = 1;
+  string level_id = 2;
+}
+
+message CreateClassResponse { Class class = 1; }
+
+message UpdateClassRequest {
+  Class class = 1;
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message UpdateClassResponse { Class class = 1; }
+
+message DeleteClassRequest { string id = 1; }
+
+message DeleteClassResponse { Class class = 1; }

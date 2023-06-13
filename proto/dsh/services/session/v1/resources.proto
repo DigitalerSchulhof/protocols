@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package dsh.services.session.v1;
+
+import "google/protobuf/timestamp.proto";
+
+message Session {
+  // Output only
+  string id = 1;
+  // Output only
+  string rev = 2;
+  // Output only
+  google.protobuf.Timestamp updated_at = 3;
+  // Output only
+  google.protobuf.Timestamp created_at = 4;
+
+  // Output only
+  string person_id = 5;
+
+  google.protobuf.Timestamp issued_at = 6;
+  bool did_show_last_login = 7;
+}

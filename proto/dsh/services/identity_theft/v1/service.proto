@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package dsh.services.identity_theft.v1;
+
+import "dsh/services/identity_theft/v1/resources.proto";
+import "google/protobuf/field_mask.proto";
+
+service IdentityTheftService {
+  rpc ListIdentityThefts(ListIdentityTheftsRequest) returns (ListIdentityTheftsResponse);
+
+  rpc GetIdentityTheft(GetIdentityTheftRequest) returns (GetIdentityTheftResponse);
+
+  rpc BatchGetIdentityThefts(BatchGetIdentityTheftsRequest)
+      returns (BatchGetIdentityTheftsResponse);
+
+  rpc CreateIdentityTheft(CreateIdentityTheftRequest) returns (CreateIdentityTheftResponse);
+
+  rpc UpdateIdentityTheft(UpdateIdentityTheftRequest) returns (UpdateIdentityTheftResponse);
+
+  rpc DeleteIdentityTheft(DeleteIdentityTheftRequest) returns (DeleteIdentityTheftResponse);
+}
+
+message ListIdentityTheftsRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+  string filter = 3;
+  string order_by = 4;
+}
+
+message ListIdentityTheftsResponse {
+  repeated IdentityTheft identity_thefts = 1;
+  string next_page_token = 2;
+}
+
+message GetIdentityTheftRequest { string id = 1; }
+
+message GetIdentityTheftResponse { IdentityTheft identity_theft = 1; }
+
+message BatchGetIdentityTheftsRequest { repeated string ids = 1; }
+
+message BatchGetIdentityTheftsResponse { repeated IdentityTheft identity_thefts = 1; }
+
+message CreateIdentityTheftRequest {
+  IdentityTheft identity_theft = 1;
+  string person_id = 2;
+}
+
+message CreateIdentityTheftResponse { IdentityTheft identity_theft = 1; }
+
+message UpdateIdentityTheftRequest {
+  IdentityTheft identity_theft = 1;
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message UpdateIdentityTheftResponse { IdentityTheft identity_theft = 1; }
+
+message DeleteIdentityTheftRequest { string id = 1; }
+
+message DeleteIdentityTheftResponse { IdentityTheft identity_theft = 1; }

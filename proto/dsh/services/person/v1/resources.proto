@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package dsh.services.person.v1;
+
+import "google/protobuf/timestamp.proto";
+
+message Person {
+  // Output only
+  string id = 1;
+  // Output only
+  string rev = 2;
+  // Output only
+  google.protobuf.Timestamp updated_at = 3;
+  // Output only
+  google.protobuf.Timestamp created_at = 4;
+
+  string firstname = 5;
+  string lastname = 6;
+  PersonType type = 7;
+  PersonGender gender = 8;
+  optional string teacher_code = 9;
+  optional string account_id = 10;
+}
+
+enum PersonType {
+  PERSON_TYPE_UNSPECIFIED = 0;
+  PERSON_TYPE_STUDENT = 1;
+  PERSON_TYPE_TEACHER = 2;
+  PERSON_TYPE_PARENT = 3;
+  PERSON_TYPE_ADMIN = 4;
+  PERSON_TYPE_OTHER = 5;
+}
+
+enum PersonGender {
+  PERSON_GENDER_UNSPECIFIED = 0;
+  PERSON_GENDER_MALE = 1;
+  PERSON_GENDER_FEMALE = 2;
+  PERSON_GENDER_OTHER = 3;
+}

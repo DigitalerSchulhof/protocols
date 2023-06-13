@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package dsh.services.schoolyear.v1;
+
+import "dsh/services/schoolyear/v1/resources.proto";
+import "google/protobuf/field_mask.proto";
+
+service SchoolyearService {
+  rpc ListSchoolyears(ListSchoolyearsRequest) returns (ListSchoolyearsResponse);
+
+  rpc GetSchoolyear(GetSchoolyearRequest)
+      returns (GetSchoolyearResponse);
+
+  rpc BatchGetSchoolyears(BatchGetSchoolyearsRequest)
+      returns (BatchGetSchoolyearsResponse);
+
+  rpc CreateSchoolyear(CreateSchoolyearRequest)
+      returns (CreateSchoolyearResponse);
+
+  rpc UpdateSchoolyear(UpdateSchoolyearRequest)
+      returns (UpdateSchoolyearResponse);
+
+  rpc DeleteSchoolyear(DeleteSchoolyearRequest)
+      returns (DeleteSchoolyearResponse);
+}
+
+message ListSchoolyearsRequest {
+  int32 page_size = 1;
+  string page_token = 2;
+  string filter = 3;
+  string order_by = 4;
+}
+
+message ListSchoolyearsResponse {
+  repeated Schoolyear schoolyears = 1;
+  string next_page_token = 2;
+}
+
+message GetSchoolyearRequest { string id = 1; }
+
+message GetSchoolyearResponse { Schoolyear schoolyear = 1; }
+
+message BatchGetSchoolyearsRequest { repeated string ids = 1; }
+
+message BatchGetSchoolyearsResponse { repeated Schoolyear schoolyears = 1; }
+
+message CreateSchoolyearRequest { Schoolyear schoolyear = 1; }
+
+message CreateSchoolyearResponse { Schoolyear schoolyear = 1; }
+
+message UpdateSchoolyearRequest {
+  Schoolyear schoolyear = 1;
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message UpdateSchoolyearResponse { Schoolyear schoolyear = 1; }
+
+message DeleteSchoolyearRequest { string id = 1; }
+
+message DeleteSchoolyearResponse { Schoolyear schoolyear = 1; }
