@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "./build",
+    "rootDir": "./build/src",
+    "target": "ESNext",
+    "lib": ["ESNext"],
+    "module": "CommonJS",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": ["./build/src/**/*"],
+  "exclude": []
+}
