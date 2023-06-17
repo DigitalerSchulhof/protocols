@@ -1,12 +1,9 @@
 {
-  "name": "@dsh/protocols",
+  "name": "@dsh/protocols-builder",
   "version": "0.0.0",
+  "private": "true",
   "scripts": {
-    "generate": "./generate.sh"
-  },
-  "dependencies": {
-    "@grpc/grpc-js": "1.8.15",
-    "google-protobuf": "3.21.2"
+    "build": "./build.sh"
   },
   "devDependencies": {
     "@types/node": "18.16.18",
