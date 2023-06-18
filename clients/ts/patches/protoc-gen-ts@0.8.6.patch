@@ -1,0 +1,13 @@
+diff --git a/src/field.js b/src/field.js
+index 36943afa0c402a92b96a8058cad90be6904b5b98..bc2c7aa385cee5c1165a1ab194ad43a78ae5dfec 100755
+--- a/src/field.js
++++ b/src/field.js
+@@ -10,7 +10,7 @@ const ts = require("typescript");
+  */
+ function wrapRepeatedType(type, fieldDescriptor) {
+     if (isRepeated(fieldDescriptor) && !isMap(fieldDescriptor)) {
+-        type = ts.factory.createArrayTypeNode(type);
++        type = ts.factory.createTypeOperatorNode(ts.SyntaxKind.ReadonlyKeyword, ts.factory.createArrayTypeNode(type));
+     }
+     return type;
+ }
