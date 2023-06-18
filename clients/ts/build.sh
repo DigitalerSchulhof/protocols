@@ -3,8 +3,8 @@ set -e
 PROTOS_PATH=$(realpath "$PWD/../../proto")
 PROTOC_GEN_TS_PATH="$PWD/node_modules/.bin/protoc-gen-ts"
 
-rm -rf ./build ./src
-mkdir -p ./build ./src
+rm -rf ./dist ./src
+mkdir -p ./dist ./src
 
 find $PROTOS_PATH \
   -name '*.proto' \
@@ -18,4 +18,4 @@ find $PROTOS_PATH \
 
 tsc
 
-cp ./package.json.build ./build/package.json
+cp ./package.json ./dist/package.json

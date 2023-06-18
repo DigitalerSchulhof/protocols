@@ -5,7 +5,12 @@
   "scripts": {
     "build": "./build.sh"
   },
+  "dependencies": {
+    "@grpc/grpc-js": "1.8.15",
+    "google-protobuf": "3.21.2"
+  },
   "devDependencies": {
+    "@types/google-protobuf": "3.15.6",
     "@types/node": "18.16.18",
     "grpc-tools": "1.12.4",
     "protoc-gen-ts": "0.8.6",

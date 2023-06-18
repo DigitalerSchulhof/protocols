@@ -1,8 +1,0 @@
-{
-  "name": "@dsh/protocols",
-  "version": "0.0.0",
-  "dependencies": {
-    "@grpc/grpc-js": "1.8.15",
-    "google-protobuf": "3.21.2"
-  }
-}
