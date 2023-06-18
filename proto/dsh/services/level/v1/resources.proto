@@ -14,8 +14,6 @@ message Level {
   // Output only
   google.protobuf.Timestamp created_at = 4;
 
-  // Output only
   string schoolyear_id = 5;
-
   string name = 6;
 }

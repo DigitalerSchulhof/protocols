@@ -10,8 +10,7 @@ service SessionService {
 
   rpc GetSession(GetSessionRequest) returns (GetSessionResponse);
 
-  rpc BatchGetSessions(BatchGetSessionsRequest)
-      returns (BatchGetSessionsResponse);
+  rpc BatchGetSessions(BatchGetSessionsRequest) returns (BatchGetSessionsResponse);
 
   rpc CreateSession(CreateSessionRequest) returns (CreateSessionResponse);
 
@@ -40,28 +39,43 @@ message ListSessionsResponse {
   }
 }
 
-message GetSessionRequest { string id = 1; }
+message GetSessionRequest {
+  string id = 1;
+}
 
-message GetSessionResponse { Session session = 1; }
+message GetSessionResponse {
+  Session session = 1;
+}
 
-message BatchGetSessionsRequest { repeated string ids = 1; }
+message BatchGetSessionsRequest {
+  repeated string ids = 1;
+}
 
-message BatchGetSessionsResponse { repeated Session sessions = 1; }
+message BatchGetSessionsResponse {
+  repeated Session sessions = 1;
+}
 
 message CreateSessionRequest {
   Session session = 1;
-  string person_id = 2;
 }
 
-message CreateSessionResponse { Session session = 1; }
+message CreateSessionResponse {
+  Session session = 1;
+}
 
 message UpdateSessionRequest {
   Session session = 1;
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message UpdateSessionResponse { Session session = 1; }
+message UpdateSessionResponse {
+  Session session = 1;
+}
 
-message DeleteSessionRequest { string id = 1; }
+message DeleteSessionRequest {
+  string id = 1;
+}
 
-message DeleteSessionResponse { Session session = 1; }
+message DeleteSessionResponse {
+  Session session = 1;
+}

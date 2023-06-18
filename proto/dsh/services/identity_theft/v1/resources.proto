@@ -14,8 +14,6 @@ message IdentityTheft {
   // Output only
   google.protobuf.Timestamp created_at = 4;
 
-  // Output only
   string person_id = 5;
-
   google.protobuf.Timestamp reported_at = 6;
 }

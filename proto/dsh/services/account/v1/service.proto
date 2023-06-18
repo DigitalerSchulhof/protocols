@@ -10,8 +10,7 @@ service AccountService {
 
   rpc GetAccount(GetAccountRequest) returns (GetAccountResponse);
 
-  rpc BatchGetAccounts(BatchGetAccountsRequest)
-      returns (BatchGetAccountsResponse);
+  rpc BatchGetAccounts(BatchGetAccountsRequest) returns (BatchGetAccountsResponse);
 
   rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);
 
@@ -40,28 +39,43 @@ message ListAccountsResponse {
   }
 }
 
-message GetAccountRequest { string id = 1; }
+message GetAccountRequest {
+  string id = 1;
+}
 
-message GetAccountResponse { Account account = 1; }
+message GetAccountResponse {
+  Account account = 1;
+}
 
-message BatchGetAccountsRequest { repeated string ids = 1; }
+message BatchGetAccountsRequest {
+  repeated string ids = 1;
+}
 
-message BatchGetAccountsResponse { repeated Account accounts = 1; }
+message BatchGetAccountsResponse {
+  repeated Account accounts = 1;
+}
 
 message CreateAccountRequest {
   Account account = 1;
-  string person_id = 2;
 }
 
-message CreateAccountResponse { Account account = 1; }
+message CreateAccountResponse {
+  Account account = 1;
+}
 
 message UpdateAccountRequest {
   Account account = 1;
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message UpdateAccountResponse { Account account = 1; }
+message UpdateAccountResponse {
+  Account account = 1;
+}
 
-message DeleteAccountRequest { string id = 1; }
+message DeleteAccountRequest {
+  string id = 1;
+}
 
-message DeleteAccountResponse { Account account = 1; }
+message DeleteAccountResponse {
+  Account account = 1;
+}

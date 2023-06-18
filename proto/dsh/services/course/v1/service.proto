@@ -10,8 +10,7 @@ service CourseService {
 
   rpc GetCourse(GetCourseRequest) returns (GetCourseResponse);
 
-  rpc BatchGetCourses(BatchGetCoursesRequest)
-      returns (BatchGetCoursesResponse);
+  rpc BatchGetCourses(BatchGetCoursesRequest) returns (BatchGetCoursesResponse);
 
   rpc CreateCourse(CreateCourseRequest) returns (CreateCourseResponse);
 
@@ -40,28 +39,43 @@ message ListCoursesResponse {
   }
 }
 
-message GetCourseRequest { string id = 1; }
+message GetCourseRequest {
+  string id = 1;
+}
 
-message GetCourseResponse { Course course = 1; }
+message GetCourseResponse {
+  Course course = 1;
+}
 
-message BatchGetCoursesRequest { repeated string ids = 1; }
+message BatchGetCoursesRequest {
+  repeated string ids = 1;
+}
 
-message BatchGetCoursesResponse { repeated Course courses = 1; }
+message BatchGetCoursesResponse {
+  repeated Course courses = 1;
+}
 
 message CreateCourseRequest {
   Course course = 1;
-  string class_id = 2;
 }
 
-message CreateCourseResponse { Course course = 1; }
+message CreateCourseResponse {
+  Course course = 1;
+}
 
 message UpdateCourseRequest {
   Course course = 1;
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message UpdateCourseResponse { Course course = 1; }
+message UpdateCourseResponse {
+  Course course = 1;
+}
 
-message DeleteCourseRequest { string id = 1; }
+message DeleteCourseRequest {
+  string id = 1;
+}
 
-message DeleteCourseResponse { Course course = 1; }
+message DeleteCourseResponse {
+  Course course = 1;
+}

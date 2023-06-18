@@ -39,25 +39,43 @@ message ListPersonsResponse {
   }
 }
 
-message GetPersonRequest { string id = 1; }
+message GetPersonRequest {
+  string id = 1;
+}
 
-message GetPersonResponse { Person person = 1; }
+message GetPersonResponse {
+  Person person = 1;
+}
 
-message BatchGetPersonsRequest { repeated string ids = 1; }
+message BatchGetPersonsRequest {
+  repeated string ids = 1;
+}
 
-message BatchGetPersonsResponse { repeated Person persons = 1; }
+message BatchGetPersonsResponse {
+  repeated Person persons = 1;
+}
 
-message CreatePersonRequest { Person person = 1; }
+message CreatePersonRequest {
+  Person person = 1;
+}
 
-message CreatePersonResponse { Person person = 1; }
+message CreatePersonResponse {
+  Person person = 1;
+}
 
 message UpdatePersonRequest {
   Person person = 1;
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message UpdatePersonResponse { Person person = 1; }
+message UpdatePersonResponse {
+  Person person = 1;
+}
 
-message DeletePersonRequest { string id = 1; }
+message DeletePersonRequest {
+  string id = 1;
+}
 
-message DeletePersonResponse { Person person = 1; }
+message DeletePersonResponse {
+  Person person = 1;
+}

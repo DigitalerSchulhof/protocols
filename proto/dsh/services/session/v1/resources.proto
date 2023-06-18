@@ -14,9 +14,7 @@ message Session {
   // Output only
   google.protobuf.Timestamp created_at = 4;
 
-  // Output only
   string person_id = 5;
-
   google.protobuf.Timestamp issued_at = 6;
   bool did_show_last_login = 7;
 }

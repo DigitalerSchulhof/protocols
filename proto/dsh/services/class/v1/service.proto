@@ -10,8 +10,7 @@ service ClassService {
 
   rpc GetClass(GetClassRequest) returns (GetClassResponse);
 
-  rpc BatchGetClasses(BatchGetClassesRequest)
-      returns (BatchGetClassesResponse);
+  rpc BatchGetClasses(BatchGetClassesRequest) returns (BatchGetClassesResponse);
 
   rpc CreateClass(CreateClassRequest) returns (CreateClassResponse);
 
@@ -40,28 +39,43 @@ message ListClassesResponse {
   }
 }
 
-message GetClassRequest { string id = 1; }
+message GetClassRequest {
+  string id = 1;
+}
 
-message GetClassResponse { Class class = 1; }
+message GetClassResponse {
+  Class class = 1;
+}
 
-message BatchGetClassesRequest { repeated string ids = 1; }
+message BatchGetClassesRequest {
+  repeated string ids = 1;
+}
 
-message BatchGetClassesResponse { repeated Class classes = 1; }
+message BatchGetClassesResponse {
+  repeated Class classes = 1;
+}
 
 message CreateClassRequest {
   Class class = 1;
-  string level_id = 2;
 }
 
-message CreateClassResponse { Class class = 1; }
+message CreateClassResponse {
+  Class class = 1;
+}
 
 message UpdateClassRequest {
   Class class = 1;
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message UpdateClassResponse { Class class = 1; }
+message UpdateClassResponse {
+  Class class = 1;
+}
 
-message DeleteClassRequest { string id = 1; }
+message DeleteClassRequest {
+  string id = 1;
+}
 
-message DeleteClassResponse { Class class = 1; }
+message DeleteClassResponse {
+  Class class = 1;
+}

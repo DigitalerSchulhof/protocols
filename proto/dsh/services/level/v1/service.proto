@@ -10,8 +10,7 @@ service LevelService {
 
   rpc GetLevel(GetLevelRequest) returns (GetLevelResponse);
 
-  rpc BatchGetLevels(BatchGetLevelsRequest)
-      returns (BatchGetLevelsResponse);
+  rpc BatchGetLevels(BatchGetLevelsRequest) returns (BatchGetLevelsResponse);
 
   rpc CreateLevel(CreateLevelRequest) returns (CreateLevelResponse);
 
@@ -40,28 +39,43 @@ message ListLevelsResponse {
   }
 }
 
-message GetLevelRequest { string id = 1; }
+message GetLevelRequest {
+  string id = 1;
+}
 
-message GetLevelResponse { Level level = 1; }
+message GetLevelResponse {
+  Level level = 1;
+}
 
-message BatchGetLevelsRequest { repeated string ids = 1; }
+message BatchGetLevelsRequest {
+  repeated string ids = 1;
+}
 
-message BatchGetLevelsResponse { repeated Level levels = 1; }
+message BatchGetLevelsResponse {
+  repeated Level levels = 1;
+}
 
 message CreateLevelRequest {
   Level level = 1;
-  string schoolyear_id = 2;
 }
 
-message CreateLevelResponse { Level level = 1; }
+message CreateLevelResponse {
+  Level level = 1;
+}
 
 message UpdateLevelRequest {
   Level level = 1;
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message UpdateLevelResponse { Level level = 1; }
+message UpdateLevelResponse {
+  Level level = 1;
+}
 
-message DeleteLevelRequest { string id = 1; }
+message DeleteLevelRequest {
+  string id = 1;
+}
 
-message DeleteLevelResponse { Level level = 1; }
+message DeleteLevelResponse {
+  Level level = 1;
+}

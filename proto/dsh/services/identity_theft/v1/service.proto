@@ -10,8 +10,7 @@ service IdentityTheftService {
 
   rpc GetIdentityTheft(GetIdentityTheftRequest) returns (GetIdentityTheftResponse);
 
-  rpc BatchGetIdentityThefts(BatchGetIdentityTheftsRequest)
-      returns (BatchGetIdentityTheftsResponse);
+  rpc BatchGetIdentityThefts(BatchGetIdentityTheftsRequest) returns (BatchGetIdentityTheftsResponse);
 
   rpc CreateIdentityTheft(CreateIdentityTheftRequest) returns (CreateIdentityTheftResponse);
 
@@ -40,28 +39,43 @@ message ListIdentityTheftsResponse {
   }
 }
 
-message GetIdentityTheftRequest { string id = 1; }
+message GetIdentityTheftRequest {
+  string id = 1;
+}
 
-message GetIdentityTheftResponse { IdentityTheft identity_theft = 1; }
+message GetIdentityTheftResponse {
+  IdentityTheft identity_theft = 1;
+}
 
-message BatchGetIdentityTheftsRequest { repeated string ids = 1; }
+message BatchGetIdentityTheftsRequest {
+  repeated string ids = 1;
+}
 
-message BatchGetIdentityTheftsResponse { repeated IdentityTheft identity_thefts = 1; }
+message BatchGetIdentityTheftsResponse {
+  repeated IdentityTheft identity_thefts = 1;
+}
 
 message CreateIdentityTheftRequest {
   IdentityTheft identity_theft = 1;
-  string person_id = 2;
 }
 
-message CreateIdentityTheftResponse { IdentityTheft identity_theft = 1; }
+message CreateIdentityTheftResponse {
+  IdentityTheft identity_theft = 1;
+}
 
 message UpdateIdentityTheftRequest {
   IdentityTheft identity_theft = 1;
   google.protobuf.FieldMask update_mask = 2;
 }
 
-message UpdateIdentityTheftResponse { IdentityTheft identity_theft = 1; }
+message UpdateIdentityTheftResponse {
+  IdentityTheft identity_theft = 1;
+}
 
-message DeleteIdentityTheftRequest { string id = 1; }
+message DeleteIdentityTheftRequest {
+  string id = 1;
+}
 
-message DeleteIdentityTheftResponse { IdentityTheft identity_theft = 1; }
+message DeleteIdentityTheftResponse {
+  IdentityTheft identity_theft = 1;
+}
