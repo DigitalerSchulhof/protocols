@@ -9,7 +9,7 @@ patchedDependencies:
     hash: 3iuqhlz3ghnhpcjdy24ibyz56u
     path: patches/@types__google-protobuf@3.15.6.patch
   protoc-gen-ts@0.8.6:
-    hash: xgrc2gymcpdeek6wg26sw2gvwm
+    hash: o3b7bphqghgvjozue6e6zoriki
     path: patches/protoc-gen-ts@0.8.6.patch
 
 dependencies:
@@ -32,7 +32,7 @@ devDependencies:
     version: 1.12.4
   protoc-gen-ts:
     specifier: 0.8.6
-    version: 0.8.6(patch_hash=xgrc2gymcpdeek6wg26sw2gvwm)(google-protobuf@3.21.2)(typescript@4.9.5)
+    version: 0.8.6(patch_hash=o3b7bphqghgvjozue6e6zoriki)(google-protobuf@3.21.2)(typescript@4.9.5)
   ts-protoc-gen:
     specifier: 0.15.0
     version: 0.15.0
@@ -460,7 +460,7 @@ packages:
       long: 5.2.3
     dev: false
 
-  /protoc-gen-ts@0.8.6(patch_hash=xgrc2gymcpdeek6wg26sw2gvwm)(google-protobuf@3.21.2)(typescript@4.9.5):
+  /protoc-gen-ts@0.8.6(patch_hash=o3b7bphqghgvjozue6e6zoriki)(google-protobuf@3.21.2)(typescript@4.9.5):
     resolution: {integrity: sha512-66oeorGy4QBvYjQGd/gaeOYyFqKyRmRgTpofmnw8buMG0P7A0jQjoKSvKJz5h5tNUaVkIzvGBUTRVGakrhhwpA==}
     hasBin: true
     peerDependencies:

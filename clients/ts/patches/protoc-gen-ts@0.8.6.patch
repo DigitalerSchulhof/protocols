@@ -1,13 +1,63 @@
+diff --git a/src/descriptor.js b/src/descriptor.js
+index ca9060b8afca73ba8ca7173a045cae521fabd01b..78b258dde4c97b134cae704beafda0e32a73b77b 100755
+--- a/src/descriptor.js
++++ b/src/descriptor.js
+@@ -237,7 +237,7 @@ function createPrimitiveMessageSignature(rootDescriptor, messageDescriptor) {
+             field.isMessage(fieldDescriptor) ||
+             field.isRequiredWithoutExplicitDefault(rootDescriptor, fieldDescriptor))
+             ? ts.factory.createToken(ts.SyntaxKind.QuestionToken)
+-            : undefined, field.wrapRepeatedType(fieldType, fieldDescriptor)));
++            : undefined, field.wrapRepeatedType(fieldType, fieldDescriptor, true)));
+     }
+     return ts.factory.createTypeLiteralNode(fieldSignatures);
+ }
+@@ -415,7 +415,7 @@ function createOneOfGetter(index, oneofDescriptor, messageDescriptor, pbIdentifi
+     return ts.factory.createGetAccessorDeclaration(undefined, oneofDescriptor.name, [], undefined, ts.factory.createBlock(statements, true));
+ }
+ function createSetter(rootDescriptor, messageDescriptor, fieldDescriptor, pbIdentifier) {
+-    const type = field.wrapRepeatedType(field.getType(fieldDescriptor, rootDescriptor), fieldDescriptor);
++    const type = field.wrapRepeatedType(field.getType(fieldDescriptor, rootDescriptor), fieldDescriptor, true);
+     const valueParameter = ts.factory.createIdentifier("value");
+     let block;
+     if (fieldDescriptor.has_oneof_index) {
+@@ -725,16 +725,16 @@ function createMessage(rootDescriptor, messageDescriptor, pbIdentifier, parentNa
+     }
+     statements.push(
+     // Create fromObject method
+-    createFromObject(rootDescriptor, messageDescriptor, parentName), 
++    createFromObject(rootDescriptor, messageDescriptor, parentName),
+     // Create toObject method
+     createToObject(rootDescriptor, messageDescriptor));
+     statements.push(
+     // Create serialize  method
+-    ...createSerialize(rootDescriptor, messageDescriptor, pbIdentifier), 
++    ...createSerialize(rootDescriptor, messageDescriptor, pbIdentifier),
+     // Create deserialize method
+-    createDeserialize(rootDescriptor, messageDescriptor, pbIdentifier, parentName), 
++    createDeserialize(rootDescriptor, messageDescriptor, pbIdentifier, parentName),
+     // Create serializeBinary method
+-    createSerializeBinary(), 
++    createSerializeBinary(),
+     // Create deserializeBinary method
+     createDeserializeBinary(messageDescriptor, parentName));
+     // Create message class
 diff --git a/src/field.js b/src/field.js
-index 36943afa0c402a92b96a8058cad90be6904b5b98..bc2c7aa385cee5c1165a1ab194ad43a78ae5dfec 100755
+index 36943afa0c402a92b96a8058cad90be6904b5b98..95632e4cc947d8dbe344732c2aec0472af586447 100755
 --- a/src/field.js
 +++ b/src/field.js
-@@ -10,7 +10,7 @@ const ts = require("typescript");
+@@ -7,10 +7,14 @@ const ts = require("typescript");
+ /**
+  * @param {*} type
+  * @param {descriptor.FieldDescriptorProto} fieldDescriptor
++ * @param {boolean} makeReadonly
   */
- function wrapRepeatedType(type, fieldDescriptor) {
+-function wrapRepeatedType(type, fieldDescriptor) {
++function wrapRepeatedType(type, fieldDescriptor, makeReadonly) {
      if (isRepeated(fieldDescriptor) && !isMap(fieldDescriptor)) {
--        type = ts.factory.createArrayTypeNode(type);
-+        type = ts.factory.createTypeOperatorNode(ts.SyntaxKind.ReadonlyKeyword, ts.factory.createArrayTypeNode(type));
+         type = ts.factory.createArrayTypeNode(type);
++      if (makeReadonly) {
++          type = ts.factory.createTypeOperatorNode(ts.SyntaxKind.ReadonlyKeyword, type);
++        }
      }
      return type;
  }
