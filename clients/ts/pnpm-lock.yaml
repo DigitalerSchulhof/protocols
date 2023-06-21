@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -14,8 +14,8 @@ patchedDependencies:
 
 dependencies:
   '@grpc/grpc-js':
-    specifier: 1.8.15
-    version: 1.8.15
+    specifier: 1.8.16
+    version: 1.8.16
   google-protobuf:
     specifier: 3.21.2
     version: 3.21.2
@@ -42,8 +42,8 @@ devDependencies:
 
 packages:
 
-  /@grpc/grpc-js@1.8.15:
-    resolution: {integrity: sha512-H2Bu/w6+oQ58DsRbQol66ERBk3V5ZIak/z/MDx0T4EgDnJWps807I6BvTjq0v6UvZtOcLO+ur+Q9wvniqu3OJA==}
+  /@grpc/grpc-js@1.8.16:
+    resolution: {integrity: sha512-Nvlq4V7XQmdRVDGgecR8ZPPCeY+uH1LhzbC+QxklwAahpQlq8YLsiOQgfkub9FiakRiohaDy361xqlTLkq9EHw==}
     engines: {node: ^8.13.0 || >=10.10.0}
     dependencies:
       '@grpc/proto-loader': 0.7.7
