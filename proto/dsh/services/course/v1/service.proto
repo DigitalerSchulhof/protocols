@@ -16,7 +16,11 @@ service CourseService {
 
   rpc UpdateCourse(UpdateCourseRequest) returns (UpdateCourseResponse);
 
+  rpc UpdateCoursesWhere(UpdateCoursesWhereRequest) returns (UpdateCoursesWhereResponse);
+
   rpc DeleteCourse(DeleteCourseRequest) returns (DeleteCourseResponse);
+
+  rpc DeleteCoursesWhere(DeleteCoursesWhereRequest) returns (DeleteCoursesWhereResponse);
 }
 
 message ListCoursesRequest {
@@ -56,7 +60,7 @@ message BatchGetCoursesResponse {
 }
 
 message CreateCourseRequest {
-  Course course = 1;
+  Course data = 1;
 }
 
 message CreateCourseResponse {
@@ -64,18 +68,39 @@ message CreateCourseResponse {
 }
 
 message UpdateCourseRequest {
-  Course course = 1;
-  google.protobuf.FieldMask update_mask = 2;
+  string id = 1;
+  Course data = 2;
+  google.protobuf.FieldMask update_mask = 3;
+  optional string if_rev = 4;
 }
 
 message UpdateCourseResponse {
   Course course = 1;
 }
 
+message UpdateCoursesWhereRequest {
+  string filter = 1;
+  Course data = 2;
+  google.protobuf.FieldMask update_mask = 3;
+}
+
+message UpdateCoursesWhereResponse {
+  repeated Course courses = 1;
+}
+
 message DeleteCourseRequest {
   string id = 1;
+  optional string if_rev = 2;
 }
 
 message DeleteCourseResponse {
   Course course = 1;
+}
+
+message DeleteCoursesWhereRequest {
+  string filter = 1;
+}
+
+message DeleteCoursesWhereResponse {
+  repeated Course courses = 1;
 }

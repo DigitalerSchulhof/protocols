@@ -18,8 +18,8 @@ message Account {
   string person_id = 5;
   string username = 6;
   string email = 7;
-  string password = 8;
-  string salt = 9;
+  bytes password = 8;
+  bytes salt = 9;
   optional google.protobuf.Timestamp password_expires_at = 10;
   optional google.protobuf.Timestamp last_login = 11;
   optional google.protobuf.Timestamp second_last_login = 12;

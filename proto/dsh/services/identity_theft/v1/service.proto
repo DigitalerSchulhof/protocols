@@ -16,7 +16,11 @@ service IdentityTheftService {
 
   rpc UpdateIdentityTheft(UpdateIdentityTheftRequest) returns (UpdateIdentityTheftResponse);
 
+  rpc UpdateIdentityTheftsWhere(UpdateIdentityTheftsWhereRequest) returns (UpdateIdentityTheftsWhereResponse);
+
   rpc DeleteIdentityTheft(DeleteIdentityTheftRequest) returns (DeleteIdentityTheftResponse);
+
+  rpc DeleteIdentityTheftsWhere(DeleteIdentityTheftsWhereRequest) returns (DeleteIdentityTheftsWhereResponse);
 }
 
 message ListIdentityTheftsRequest {
@@ -56,7 +60,7 @@ message BatchGetIdentityTheftsResponse {
 }
 
 message CreateIdentityTheftRequest {
-  IdentityTheft identity_theft = 1;
+  IdentityTheft data = 1;
 }
 
 message CreateIdentityTheftResponse {
@@ -64,18 +68,39 @@ message CreateIdentityTheftResponse {
 }
 
 message UpdateIdentityTheftRequest {
-  IdentityTheft identity_theft = 1;
-  google.protobuf.FieldMask update_mask = 2;
+  string id = 1;
+  IdentityTheft data = 2;
+  google.protobuf.FieldMask update_mask = 3;
+  optional string if_rev = 4;
 }
 
 message UpdateIdentityTheftResponse {
   IdentityTheft identity_theft = 1;
 }
 
+message UpdateIdentityTheftsWhereRequest {
+  string filter = 1;
+  IdentityTheft data = 2;
+  google.protobuf.FieldMask update_mask = 3;
+}
+
+message UpdateIdentityTheftsWhereResponse {
+  repeated IdentityTheft identity_thefts = 1;
+}
+
 message DeleteIdentityTheftRequest {
   string id = 1;
+  optional string if_rev = 2;
 }
 
 message DeleteIdentityTheftResponse {
   IdentityTheft identity_theft = 1;
+}
+
+message DeleteIdentityTheftsWhereRequest {
+  string filter = 1;
+}
+
+message DeleteIdentityTheftsWhereResponse {
+  repeated IdentityTheft identity_thefts = 1;
 }

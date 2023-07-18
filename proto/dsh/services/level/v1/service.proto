@@ -16,7 +16,11 @@ service LevelService {
 
   rpc UpdateLevel(UpdateLevelRequest) returns (UpdateLevelResponse);
 
+  rpc UpdateLevelsWhere(UpdateLevelsWhereRequest) returns (UpdateLevelsWhereResponse);
+
   rpc DeleteLevel(DeleteLevelRequest) returns (DeleteLevelResponse);
+
+  rpc DeleteLevelsWhere(DeleteLevelsWhereRequest) returns (DeleteLevelsWhereResponse);
 }
 
 message ListLevelsRequest {
@@ -56,7 +60,7 @@ message BatchGetLevelsResponse {
 }
 
 message CreateLevelRequest {
-  Level level = 1;
+  Level data = 1;
 }
 
 message CreateLevelResponse {
@@ -64,18 +68,39 @@ message CreateLevelResponse {
 }
 
 message UpdateLevelRequest {
-  Level level = 1;
-  google.protobuf.FieldMask update_mask = 2;
+  string id = 1;
+  Level data = 2;
+  google.protobuf.FieldMask update_mask = 3;
+  optional string if_rev = 4;
 }
 
 message UpdateLevelResponse {
   Level level = 1;
 }
 
+message UpdateLevelsWhereRequest {
+  string filter = 1;
+  Level data = 2;
+  google.protobuf.FieldMask update_mask = 3;
+}
+
+message UpdateLevelsWhereResponse {
+  repeated Level levels = 1;
+}
+
 message DeleteLevelRequest {
   string id = 1;
+  optional string if_rev = 2;
 }
 
 message DeleteLevelResponse {
   Level level = 1;
+}
+
+message DeleteLevelsWhereRequest {
+  string filter = 1;
+}
+
+message DeleteLevelsWhereResponse {
+  repeated Level levels = 1;
 }

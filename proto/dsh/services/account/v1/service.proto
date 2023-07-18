@@ -16,7 +16,11 @@ service AccountService {
 
   rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse);
 
+  rpc UpdateAccountsWhere(UpdateAccountsWhereRequest) returns (UpdateAccountsWhereResponse);
+
   rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse);
+
+  rpc DeleteAccountsWhere(DeleteAccountsWhereRequest) returns (DeleteAccountsWhereResponse);
 }
 
 message ListAccountsRequest {
@@ -56,7 +60,8 @@ message BatchGetAccountsResponse {
 }
 
 message CreateAccountRequest {
-  Account account = 1;
+  Account data = 1;
+  optional string ifPersonRev = 2;
 }
 
 message CreateAccountResponse {
@@ -64,18 +69,39 @@ message CreateAccountResponse {
 }
 
 message UpdateAccountRequest {
-  Account account = 1;
-  google.protobuf.FieldMask update_mask = 2;
+  string id = 1;
+  Account data = 2;
+  google.protobuf.FieldMask update_mask = 3;
+  optional string if_rev = 4;
 }
 
 message UpdateAccountResponse {
   Account account = 1;
 }
 
+message UpdateAccountsWhereRequest {
+  string filter = 1;
+  Account data = 2;
+  google.protobuf.FieldMask update_mask = 3;
+}
+
+message UpdateAccountsWhereResponse {
+  repeated Account accounts = 1;
+}
+
 message DeleteAccountRequest {
   string id = 1;
+  optional string if_rev = 2;
 }
 
 message DeleteAccountResponse {
   Account account = 1;
+}
+
+message DeleteAccountsWhereRequest {
+  string filter = 1;
+}
+
+message DeleteAccountsWhereResponse {
+  repeated Account accounts = 1;
 }

@@ -16,7 +16,11 @@ service PersonService {
 
   rpc UpdatePerson(UpdatePersonRequest) returns (UpdatePersonResponse);
 
+  rpc UpdatePersonsWhere(UpdatePersonsWhereRequest) returns (UpdatePersonsWhereResponse);
+
   rpc DeletePerson(DeletePersonRequest) returns (DeletePersonResponse);
+
+  rpc DeletePersonsWhere(DeletePersonsWhereRequest) returns (DeletePersonsWhereResponse);
 }
 
 message ListPersonsRequest {
@@ -56,7 +60,7 @@ message BatchGetPersonsResponse {
 }
 
 message CreatePersonRequest {
-  Person person = 1;
+  Person data = 1;
 }
 
 message CreatePersonResponse {
@@ -64,18 +68,39 @@ message CreatePersonResponse {
 }
 
 message UpdatePersonRequest {
-  Person person = 1;
-  google.protobuf.FieldMask update_mask = 2;
+  string id = 1;
+  Person data = 2;
+  google.protobuf.FieldMask update_mask = 3;
+  optional string if_rev = 4;
 }
 
 message UpdatePersonResponse {
   Person person = 1;
 }
 
+message UpdatePersonsWhereRequest {
+  string filter = 1;
+  Person data = 2;
+  google.protobuf.FieldMask update_mask = 3;
+}
+
+message UpdatePersonsWhereResponse {
+  repeated Person persons = 1;
+}
+
 message DeletePersonRequest {
   string id = 1;
+  optional string if_rev = 2;
 }
 
 message DeletePersonResponse {
   Person person = 1;
+}
+
+message DeletePersonsWhereRequest {
+  string filter = 1;
+}
+
+message DeletePersonsWhereResponse {
+  repeated Person persons = 1;
 }
