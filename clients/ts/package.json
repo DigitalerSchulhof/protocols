@@ -1,12 +1,12 @@
 {
-  "name": "@dsh/protocols-builder",
+  "name": "@dsh/protocols",
   "version": "0.0.0",
   "private": "true",
   "scripts": {
     "build": "./build.sh"
   },
   "dependencies": {
-    "@grpc/grpc-js": "1.8.16",
+    "@grpc/grpc-js": "1.8.18",
     "google-protobuf": "3.21.2"
   },
   "devDependencies": {
@@ -15,7 +15,7 @@
     "grpc-tools": "1.12.4",
     "protoc-gen-ts": "0.8.6",
     "ts-protoc-gen": "0.15.0",
-    "typescript": "4.9.5"
+    "typescript": "5.1.6"
   },
   "pnpm": {
     "updateConfig": {
