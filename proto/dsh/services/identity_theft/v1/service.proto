@@ -21,6 +21,8 @@ service IdentityTheftService {
   rpc DeleteIdentityTheft(DeleteIdentityTheftRequest) returns (DeleteIdentityTheftResponse);
 
   rpc DeleteIdentityTheftsWhere(DeleteIdentityTheftsWhereRequest) returns (DeleteIdentityTheftsWhereResponse);
+
+  rpc ReportIdentityTheft(ReportIdentityTheftRequest) returns (ReportIdentityTheftResponse);
 }
 
 message ListIdentityTheftsRequest {
@@ -103,4 +105,12 @@ message DeleteIdentityTheftsWhereRequest {
 
 message DeleteIdentityTheftsWhereResponse {
   repeated IdentityTheft identity_thefts = 1;
+}
+
+message ReportIdentityTheftRequest {
+  string person_id = 1;
+}
+
+message ReportIdentityTheftResponse {
+  IdentityTheft identity_theft = 1;
 }
