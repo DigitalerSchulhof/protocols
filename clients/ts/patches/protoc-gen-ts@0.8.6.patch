@@ -49,3 +49,17 @@ index 36943afa0c402a92b96a8058cad90be6904b5b98..267b8472fb0c0b6e4051236668e1a09f
      }
      return type;
  }
+diff --git a/src/rpc/server.js b/src/rpc/server.js
+index 7212fcefa72608eb4a4e58c1c34154daa1aabd5c..e1f313f9ec66631c418fd5be91cad978eb928cee 100755
+--- a/src/rpc/server.js
++++ b/src/rpc/server.js
+@@ -136,9 +136,6 @@ exports.createGrpcInterfaceType = createGrpcInterfaceType;
+ function createUnimplementedServer(rootDescriptor, serviceDescriptor, grpcIdentifier) {
+     const members = [
+         ts.factory.createPropertyDeclaration([ts.factory.createModifier(ts.SyntaxKind.StaticKeyword)], "definition", undefined, undefined, createServiceDefinition(rootDescriptor, serviceDescriptor)),
+-        ts.factory.createIndexSignature(undefined, [
+-            util.createParameter("method", ts.factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)),
+-        ], ts.factory.createTypeReferenceNode(ts.factory.createQualifiedName(grpcIdentifier, "UntypedHandleCall"))),
+     ];
+     for (const methodDescriptor of serviceDescriptor.method) {
+         const parameters = [];

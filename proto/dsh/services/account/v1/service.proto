@@ -61,7 +61,7 @@ message BatchGetAccountsResponse {
 
 message CreateAccountRequest {
   Account data = 1;
-  optional string ifPersonRev = 2;
+  optional string if_person_rev = 2;
 }
 
 message CreateAccountResponse {
