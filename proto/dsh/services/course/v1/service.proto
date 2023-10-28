@@ -8,19 +8,13 @@ import "google/protobuf/field_mask.proto";
 service CourseService {
   rpc ListCourses(ListCoursesRequest) returns (ListCoursesResponse);
 
-  rpc GetCourse(GetCourseRequest) returns (GetCourseResponse);
-
-  rpc BatchGetCourses(BatchGetCoursesRequest) returns (BatchGetCoursesResponse);
+  rpc GetCourses(GetCoursesRequest) returns (GetCoursesResponse);
 
   rpc CreateCourse(CreateCourseRequest) returns (CreateCourseResponse);
 
   rpc UpdateCourse(UpdateCourseRequest) returns (UpdateCourseResponse);
 
-  rpc UpdateCoursesWhere(UpdateCoursesWhereRequest) returns (UpdateCoursesWhereResponse);
-
   rpc DeleteCourse(DeleteCourseRequest) returns (DeleteCourseResponse);
-
-  rpc DeleteCoursesWhere(DeleteCoursesWhereRequest) returns (DeleteCoursesWhereResponse);
 }
 
 message ListCoursesRequest {
@@ -43,64 +37,26 @@ message ListCoursesResponse {
   }
 }
 
-message GetCourseRequest {
-  string id = 1;
-}
+message GetCoursesRequest { repeated string ids = 1; }
 
-message GetCourseResponse {
-  Course course = 1;
-}
+message GetCoursesResponse { repeated Course courses = 1; }
 
-message BatchGetCoursesRequest {
-  repeated string ids = 1;
-}
+message CreateCourseRequest { Course course = 1; }
 
-message BatchGetCoursesResponse {
-  repeated Course courses = 1;
-}
-
-message CreateCourseRequest {
-  Course data = 1;
-}
-
-message CreateCourseResponse {
-  Course course = 1;
-}
+message CreateCourseResponse { Course course = 1; }
 
 message UpdateCourseRequest {
   string id = 1;
-  Course data = 2;
+  Course course = 2;
   google.protobuf.FieldMask update_mask = 3;
   optional string if_rev = 4;
 }
 
-message UpdateCourseResponse {
-  Course course = 1;
-}
-
-message UpdateCoursesWhereRequest {
-  string filter = 1;
-  Course data = 2;
-  google.protobuf.FieldMask update_mask = 3;
-}
-
-message UpdateCoursesWhereResponse {
-  repeated Course courses = 1;
-}
+message UpdateCourseResponse { Course course = 1; }
 
 message DeleteCourseRequest {
   string id = 1;
   optional string if_rev = 2;
 }
 
-message DeleteCourseResponse {
-  Course course = 1;
-}
-
-message DeleteCoursesWhereRequest {
-  string filter = 1;
-}
-
-message DeleteCoursesWhereResponse {
-  repeated Course courses = 1;
-}
+message DeleteCourseResponse { Course course = 1; }

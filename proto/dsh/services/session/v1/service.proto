@@ -8,19 +8,13 @@ import "google/protobuf/field_mask.proto";
 service SessionService {
   rpc ListSessions(ListSessionsRequest) returns (ListSessionsResponse);
 
-  rpc GetSession(GetSessionRequest) returns (GetSessionResponse);
-
-  rpc BatchGetSessions(BatchGetSessionsRequest) returns (BatchGetSessionsResponse);
+  rpc GetSessions(GetSessionsRequest) returns (GetSessionsResponse);
 
   rpc CreateSession(CreateSessionRequest) returns (CreateSessionResponse);
 
   rpc UpdateSession(UpdateSessionRequest) returns (UpdateSessionResponse);
 
-  rpc UpdateSessionsWhere(UpdateSessionsWhereRequest) returns (UpdateSessionsWhereResponse);
-
   rpc DeleteSession(DeleteSessionRequest) returns (DeleteSessionResponse);
-
-  rpc DeleteSessionsWhere(DeleteSessionsWhereRequest) returns (DeleteSessionsWhereResponse);
 }
 
 message ListSessionsRequest {
@@ -43,64 +37,26 @@ message ListSessionsResponse {
   }
 }
 
-message GetSessionRequest {
-  string id = 1;
-}
+message GetSessionsRequest { repeated string ids = 1; }
 
-message GetSessionResponse {
-  Session session = 1;
-}
+message GetSessionsResponse { repeated Session sessions = 1; }
 
-message BatchGetSessionsRequest {
-  repeated string ids = 1;
-}
+message CreateSessionRequest { Session session = 1; }
 
-message BatchGetSessionsResponse {
-  repeated Session sessions = 1;
-}
-
-message CreateSessionRequest {
-  Session data = 1;
-}
-
-message CreateSessionResponse {
-  Session session = 1;
-}
+message CreateSessionResponse { Session session = 1; }
 
 message UpdateSessionRequest {
   string id = 1;
-  Session data = 2;
+  Session session = 2;
   google.protobuf.FieldMask update_mask = 3;
   optional string if_rev = 4;
 }
 
-message UpdateSessionResponse {
-  Session session = 1;
-}
-
-message UpdateSessionsWhereRequest {
-  string filter = 1;
-  Session data = 2;
-  google.protobuf.FieldMask update_mask = 3;
-}
-
-message UpdateSessionsWhereResponse {
-  repeated Session sessions = 1;
-}
+message UpdateSessionResponse { Session session = 1; }
 
 message DeleteSessionRequest {
   string id = 1;
   optional string if_rev = 2;
 }
 
-message DeleteSessionResponse {
-  Session session = 1;
-}
-
-message DeleteSessionsWhereRequest {
-  string filter = 1;
-}
-
-message DeleteSessionsWhereResponse {
-  repeated Session sessions = 1;
-}
+message DeleteSessionResponse { Session session = 1; }

@@ -8,19 +8,13 @@ import "google/protobuf/field_mask.proto";
 service ClassService {
   rpc ListClasses(ListClassesRequest) returns (ListClassesResponse);
 
-  rpc GetClass(GetClassRequest) returns (GetClassResponse);
-
-  rpc BatchGetClasses(BatchGetClassesRequest) returns (BatchGetClassesResponse);
+  rpc GetClasses(GetClassesRequest) returns (GetClassesResponse);
 
   rpc CreateClass(CreateClassRequest) returns (CreateClassResponse);
 
   rpc UpdateClass(UpdateClassRequest) returns (UpdateClassResponse);
 
-  rpc UpdateClassesWhere(UpdateClassesWhereRequest) returns (UpdateClassesWhereResponse);
-
   rpc DeleteClass(DeleteClassRequest) returns (DeleteClassResponse);
-
-  rpc DeleteClassesWhere(DeleteClassesWhereRequest) returns (DeleteClassesWhereResponse);
 }
 
 message ListClassesRequest {
@@ -43,64 +37,26 @@ message ListClassesResponse {
   }
 }
 
-message GetClassRequest {
-  string id = 1;
-}
+message GetClassesRequest { repeated string ids = 1; }
 
-message GetClassResponse {
-  Class class = 1;
-}
+message GetClassesResponse { repeated Class classes = 1; }
 
-message BatchGetClassesRequest {
-  repeated string ids = 1;
-}
+message CreateClassRequest { Class class = 1; }
 
-message BatchGetClassesResponse {
-  repeated Class classes = 1;
-}
-
-message CreateClassRequest {
-  Class data = 1;
-}
-
-message CreateClassResponse {
-  Class class = 1;
-}
+message CreateClassResponse { Class class = 1; }
 
 message UpdateClassRequest {
   string id = 1;
-  Class data = 2;
+  Class class = 2;
   google.protobuf.FieldMask update_mask = 3;
   optional string if_rev = 4;
 }
 
-message UpdateClassResponse {
-  Class class = 1;
-}
-
-message UpdateClassesWhereRequest {
-  string filter = 1;
-  Class data = 2;
-  google.protobuf.FieldMask update_mask = 3;
-}
-
-message UpdateClassesWhereResponse {
-  repeated Class classes = 1;
-}
+message UpdateClassResponse { Class class = 1; }
 
 message DeleteClassRequest {
   string id = 1;
   optional string if_rev = 2;
 }
 
-message DeleteClassResponse {
-  Class class = 1;
-}
-
-message DeleteClassesWhereRequest {
-  string filter = 1;
-}
-
-message DeleteClassesWhereResponse {
-  repeated Class classes = 1;
-}
+message DeleteClassResponse { Class class = 1; }

@@ -8,19 +8,13 @@ import "google/protobuf/field_mask.proto";
 service LevelService {
   rpc ListLevels(ListLevelsRequest) returns (ListLevelsResponse);
 
-  rpc GetLevel(GetLevelRequest) returns (GetLevelResponse);
-
-  rpc BatchGetLevels(BatchGetLevelsRequest) returns (BatchGetLevelsResponse);
+  rpc GetLevels(GetLevelsRequest) returns (GetLevelsResponse);
 
   rpc CreateLevel(CreateLevelRequest) returns (CreateLevelResponse);
 
   rpc UpdateLevel(UpdateLevelRequest) returns (UpdateLevelResponse);
 
-  rpc UpdateLevelsWhere(UpdateLevelsWhereRequest) returns (UpdateLevelsWhereResponse);
-
   rpc DeleteLevel(DeleteLevelRequest) returns (DeleteLevelResponse);
-
-  rpc DeleteLevelsWhere(DeleteLevelsWhereRequest) returns (DeleteLevelsWhereResponse);
 }
 
 message ListLevelsRequest {
@@ -43,64 +37,26 @@ message ListLevelsResponse {
   }
 }
 
-message GetLevelRequest {
-  string id = 1;
-}
+message GetLevelsRequest { repeated string ids = 1; }
 
-message GetLevelResponse {
-  Level level = 1;
-}
+message GetLevelsResponse { repeated Level levels = 1; }
 
-message BatchGetLevelsRequest {
-  repeated string ids = 1;
-}
+message CreateLevelRequest { Level level = 1; }
 
-message BatchGetLevelsResponse {
-  repeated Level levels = 1;
-}
-
-message CreateLevelRequest {
-  Level data = 1;
-}
-
-message CreateLevelResponse {
-  Level level = 1;
-}
+message CreateLevelResponse { Level level = 1; }
 
 message UpdateLevelRequest {
   string id = 1;
-  Level data = 2;
+  Level level = 2;
   google.protobuf.FieldMask update_mask = 3;
   optional string if_rev = 4;
 }
 
-message UpdateLevelResponse {
-  Level level = 1;
-}
-
-message UpdateLevelsWhereRequest {
-  string filter = 1;
-  Level data = 2;
-  google.protobuf.FieldMask update_mask = 3;
-}
-
-message UpdateLevelsWhereResponse {
-  repeated Level levels = 1;
-}
+message UpdateLevelResponse { Level level = 1; }
 
 message DeleteLevelRequest {
   string id = 1;
   optional string if_rev = 2;
 }
 
-message DeleteLevelResponse {
-  Level level = 1;
-}
-
-message DeleteLevelsWhereRequest {
-  string filter = 1;
-}
-
-message DeleteLevelsWhereResponse {
-  repeated Level levels = 1;
-}
+message DeleteLevelResponse { Level level = 1; }

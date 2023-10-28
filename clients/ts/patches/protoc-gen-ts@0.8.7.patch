@@ -1,0 +1,56 @@
+diff --git a/protoc-gen-ts.js b/protoc-gen-ts.js
+index e77120ffecf5f7c48c225c38b0b276ee100df0ae..2969e19155a2f5f25bcb16ac90d000b24e3b25cd 100755
+--- a/protoc-gen-ts.js
++++ b/protoc-gen-ts.js
+@@ -179024,9 +179024,11 @@ function preprocess(targetDescriptor, path, prefix) {
+  * @param {*} type
+  * @param {descriptor.FieldDescriptorProto} fieldDescriptor
+  */
+-function wrapRepeatedType(type, fieldDescriptor) {
++function wrapRepeatedType(type, fieldDescriptor, makeReadonly) {
+     if (isRepeated(fieldDescriptor) && !isMap(fieldDescriptor)) {
+         type = typescriptExports.factory.createArrayTypeNode(type);
++
++			makeReadonly && (type = typescriptExports.factory.createTypeOperatorNode(typescriptExports.SyntaxKind.ReadonlyKeyword, type));
+     }
+     return type;
+ }
+@@ -179441,7 +179443,7 @@ function createMessageSignature(rootDescriptor, messageDescriptor, parentName =
+         if (!fieldDescriptor.has_oneof_index) {
+             fieldSignatures.push(addDeprecatedJsDoc(typescriptExports.factory.createPropertySignature(undefined, getFieldName(fieldDescriptor), isOptional(rootDescriptor, fieldDescriptor)
+                 ? typescriptExports.factory.createToken(typescriptExports.SyntaxKind.QuestionToken)
+-                : undefined, wrapRepeatedType(getType(fieldDescriptor, rootDescriptor), fieldDescriptor)), fieldDescriptor.options?.deprecated));
++                : undefined, wrapRepeatedType(getType(fieldDescriptor, rootDescriptor), fieldDescriptor, true)), fieldDescriptor.options?.deprecated));
+         }
+     }
+     if (oneOfSignatures.length) {
+@@ -179479,7 +179481,7 @@ function createPrimitiveMessageSignature(rootDescriptor, messageDescriptor) {
+             isMessage(fieldDescriptor) ||
+             isRequiredWithoutExplicitDefault(rootDescriptor, fieldDescriptor))
+             ? typescriptExports.factory.createToken(typescriptExports.SyntaxKind.QuestionToken)
+-            : undefined, wrapRepeatedType(fieldType, fieldDescriptor)));
++            : undefined, wrapRepeatedType(fieldType, fieldDescriptor, true)));
+     }
+     return typescriptExports.factory.createTypeLiteralNode(fieldSignatures);
+ }
+@@ -179657,7 +179659,7 @@ function createOneOfGetter(index, oneofDescriptor, messageDescriptor, pbIdentifi
+     return typescriptExports.factory.createGetAccessorDeclaration(undefined, oneofDescriptor.name, [], undefined, typescriptExports.factory.createBlock(statements, true));
+ }
+ function createSetter(rootDescriptor, messageDescriptor, fieldDescriptor, pbIdentifier) {
+-    const type = wrapRepeatedType(getType(fieldDescriptor, rootDescriptor), fieldDescriptor);
++    const type = wrapRepeatedType(getType(fieldDescriptor, rootDescriptor), fieldDescriptor, true);
+     const valueParameter = typescriptExports.factory.createIdentifier("value");
+     let block;
+     if (fieldDescriptor.has_oneof_index) {
+@@ -180601,10 +180603,7 @@ function createGrpcInterfaceType(grpcIdentifier) {
+  */
+ function createUnimplementedServer(rootDescriptor, serviceDescriptor, grpcIdentifier) {
+     const members = [
+-        typescriptExports.factory.createPropertyDeclaration([typescriptExports.factory.createModifier(typescriptExports.SyntaxKind.StaticKeyword)], "definition", undefined, undefined, createServiceDefinition(rootDescriptor, serviceDescriptor)),
+-        typescriptExports.factory.createIndexSignature(undefined, [
+-            createParameter("method", typescriptExports.factory.createKeywordTypeNode(typescriptExports.SyntaxKind.StringKeyword)),
+-        ], typescriptExports.factory.createTypeReferenceNode(typescriptExports.factory.createQualifiedName(grpcIdentifier, "UntypedHandleCall"))),
++        typescriptExports.factory.createPropertyDeclaration([typescriptExports.factory.createModifier(typescriptExports.SyntaxKind.StaticKeyword)], "definition", undefined, undefined, createServiceDefinition(rootDescriptor, serviceDescriptor))
+     ];
+     for (const methodDescriptor of serviceDescriptor.method) {
+         const parameters = [];

@@ -6,23 +6,20 @@ import "dsh/services/identity_theft/v1/resources.proto";
 import "google/protobuf/field_mask.proto";
 
 service IdentityTheftService {
-  rpc ListIdentityThefts(ListIdentityTheftsRequest) returns (ListIdentityTheftsResponse);
+  rpc ListIdentityThefts(ListIdentityTheftsRequest)
+      returns (ListIdentityTheftsResponse);
 
-  rpc GetIdentityTheft(GetIdentityTheftRequest) returns (GetIdentityTheftResponse);
+  rpc GetIdentityThefts(GetIdentityTheftsRequest)
+      returns (GetIdentityTheftsResponse);
 
-  rpc BatchGetIdentityThefts(BatchGetIdentityTheftsRequest) returns (BatchGetIdentityTheftsResponse);
+  rpc CreateIdentityTheft(CreateIdentityTheftRequest)
+      returns (CreateIdentityTheftResponse);
 
-  rpc CreateIdentityTheft(CreateIdentityTheftRequest) returns (CreateIdentityTheftResponse);
+  rpc UpdateIdentityTheft(UpdateIdentityTheftRequest)
+      returns (UpdateIdentityTheftResponse);
 
-  rpc UpdateIdentityTheft(UpdateIdentityTheftRequest) returns (UpdateIdentityTheftResponse);
-
-  rpc UpdateIdentityTheftsWhere(UpdateIdentityTheftsWhereRequest) returns (UpdateIdentityTheftsWhereResponse);
-
-  rpc DeleteIdentityTheft(DeleteIdentityTheftRequest) returns (DeleteIdentityTheftResponse);
-
-  rpc DeleteIdentityTheftsWhere(DeleteIdentityTheftsWhereRequest) returns (DeleteIdentityTheftsWhereResponse);
-
-  rpc ReportIdentityTheft(ReportIdentityTheftRequest) returns (ReportIdentityTheftResponse);
+  rpc DeleteIdentityTheft(DeleteIdentityTheftRequest)
+      returns (DeleteIdentityTheftResponse);
 }
 
 message ListIdentityTheftsRequest {
@@ -45,72 +42,28 @@ message ListIdentityTheftsResponse {
   }
 }
 
-message GetIdentityTheftRequest {
-  string id = 1;
-}
+message GetIdentityTheftsRequest { repeated string ids = 1; }
 
-message GetIdentityTheftResponse {
-  IdentityTheft identity_theft = 1;
-}
-
-message BatchGetIdentityTheftsRequest {
-  repeated string ids = 1;
-}
-
-message BatchGetIdentityTheftsResponse {
+message GetIdentityTheftsResponse {
   repeated IdentityTheft identity_thefts = 1;
 }
 
-message CreateIdentityTheftRequest {
-  IdentityTheft data = 1;
-}
+message CreateIdentityTheftRequest { IdentityTheft identity_theft = 1; }
 
-message CreateIdentityTheftResponse {
-  IdentityTheft identity_theft = 1;
-}
+message CreateIdentityTheftResponse { IdentityTheft identity_theft = 1; }
 
 message UpdateIdentityTheftRequest {
   string id = 1;
-  IdentityTheft data = 2;
+  IdentityTheft identity_theft = 2;
   google.protobuf.FieldMask update_mask = 3;
   optional string if_rev = 4;
 }
 
-message UpdateIdentityTheftResponse {
-  IdentityTheft identity_theft = 1;
-}
-
-message UpdateIdentityTheftsWhereRequest {
-  string filter = 1;
-  IdentityTheft data = 2;
-  google.protobuf.FieldMask update_mask = 3;
-}
-
-message UpdateIdentityTheftsWhereResponse {
-  repeated IdentityTheft identity_thefts = 1;
-}
+message UpdateIdentityTheftResponse { IdentityTheft identity_theft = 1; }
 
 message DeleteIdentityTheftRequest {
   string id = 1;
   optional string if_rev = 2;
 }
 
-message DeleteIdentityTheftResponse {
-  IdentityTheft identity_theft = 1;
-}
-
-message DeleteIdentityTheftsWhereRequest {
-  string filter = 1;
-}
-
-message DeleteIdentityTheftsWhereResponse {
-  repeated IdentityTheft identity_thefts = 1;
-}
-
-message ReportIdentityTheftRequest {
-  string person_id = 1;
-}
-
-message ReportIdentityTheftResponse {
-  IdentityTheft identity_theft = 1;
-}
+message DeleteIdentityTheftResponse { IdentityTheft identity_theft = 1; }

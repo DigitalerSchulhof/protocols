@@ -53,12 +53,12 @@ message AccountSettings {
 
   message Profile {
     google.protobuf.Duration session_timeout = 1;
-    FormOfAddress form_of_address = 2;
+    AccountFormOfAddress form_of_address = 2;
   }
+}
 
-  enum FormOfAddress {
-    FORM_OF_ADDRESS_UNSPECIFIED = 0;
-    FORM_OF_ADDRESS_FORMAL = 1;
-    FORM_OF_ADDRESS_INFORMAL = 2;
-  }
+enum AccountFormOfAddress {
+  FORM_OF_ADDRESS_UNSPECIFIED = 0;
+  FORM_OF_ADDRESS_FORMAL = 1;
+  FORM_OF_ADDRESS_INFORMAL = 2;
 }

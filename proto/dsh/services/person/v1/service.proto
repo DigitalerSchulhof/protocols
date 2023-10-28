@@ -8,19 +8,13 @@ import "google/protobuf/field_mask.proto";
 service PersonService {
   rpc ListPersons(ListPersonsRequest) returns (ListPersonsResponse);
 
-  rpc GetPerson(GetPersonRequest) returns (GetPersonResponse);
-
-  rpc BatchGetPersons(BatchGetPersonsRequest) returns (BatchGetPersonsResponse);
+  rpc GetPersons(GetPersonsRequest) returns (GetPersonsResponse);
 
   rpc CreatePerson(CreatePersonRequest) returns (CreatePersonResponse);
 
   rpc UpdatePerson(UpdatePersonRequest) returns (UpdatePersonResponse);
 
-  rpc UpdatePersonsWhere(UpdatePersonsWhereRequest) returns (UpdatePersonsWhereResponse);
-
   rpc DeletePerson(DeletePersonRequest) returns (DeletePersonResponse);
-
-  rpc DeletePersonsWhere(DeletePersonsWhereRequest) returns (DeletePersonsWhereResponse);
 }
 
 message ListPersonsRequest {
@@ -43,64 +37,26 @@ message ListPersonsResponse {
   }
 }
 
-message GetPersonRequest {
-  string id = 1;
-}
+message GetPersonsRequest { repeated string ids = 1; }
 
-message GetPersonResponse {
-  Person person = 1;
-}
+message GetPersonsResponse { repeated Person persons = 1; }
 
-message BatchGetPersonsRequest {
-  repeated string ids = 1;
-}
+message CreatePersonRequest { Person person = 1; }
 
-message BatchGetPersonsResponse {
-  repeated Person persons = 1;
-}
-
-message CreatePersonRequest {
-  Person data = 1;
-}
-
-message CreatePersonResponse {
-  Person person = 1;
-}
+message CreatePersonResponse { Person person = 1; }
 
 message UpdatePersonRequest {
   string id = 1;
-  Person data = 2;
+  Person person = 2;
   google.protobuf.FieldMask update_mask = 3;
   optional string if_rev = 4;
 }
 
-message UpdatePersonResponse {
-  Person person = 1;
-}
-
-message UpdatePersonsWhereRequest {
-  string filter = 1;
-  Person data = 2;
-  google.protobuf.FieldMask update_mask = 3;
-}
-
-message UpdatePersonsWhereResponse {
-  repeated Person persons = 1;
-}
+message UpdatePersonResponse { Person person = 1; }
 
 message DeletePersonRequest {
   string id = 1;
   optional string if_rev = 2;
 }
 
-message DeletePersonResponse {
-  Person person = 1;
-}
-
-message DeletePersonsWhereRequest {
-  string filter = 1;
-}
-
-message DeletePersonsWhereResponse {
-  repeated Person persons = 1;
-}
+message DeletePersonResponse { Person person = 1; }

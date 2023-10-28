@@ -8,19 +8,16 @@ import "google/protobuf/field_mask.proto";
 service SchoolyearService {
   rpc ListSchoolyears(ListSchoolyearsRequest) returns (ListSchoolyearsResponse);
 
-  rpc GetSchoolyear(GetSchoolyearRequest) returns (GetSchoolyearResponse);
+  rpc GetSchoolyears(GetSchoolyearsRequest) returns (GetSchoolyearsResponse);
 
-  rpc BatchGetSchoolyears(BatchGetSchoolyearsRequest) returns (BatchGetSchoolyearsResponse);
+  rpc CreateSchoolyear(CreateSchoolyearRequest)
+      returns (CreateSchoolyearResponse);
 
-  rpc CreateSchoolyear(CreateSchoolyearRequest) returns (CreateSchoolyearResponse);
+  rpc UpdateSchoolyear(UpdateSchoolyearRequest)
+      returns (UpdateSchoolyearResponse);
 
-  rpc UpdateSchoolyear(UpdateSchoolyearRequest) returns (UpdateSchoolyearResponse);
-
-  rpc UpdateSchoolyearsWhere(UpdateSchoolyearsWhereRequest) returns (UpdateSchoolyearsWhereResponse);
-
-  rpc DeleteSchoolyear(DeleteSchoolyearRequest) returns (DeleteSchoolyearResponse);
-
-  rpc DeleteSchoolyearsWhere(DeleteSchoolyearsWhereRequest) returns (DeleteSchoolyearsWhereResponse);
+  rpc DeleteSchoolyear(DeleteSchoolyearRequest)
+      returns (DeleteSchoolyearResponse);
 }
 
 message ListSchoolyearsRequest {
@@ -43,64 +40,26 @@ message ListSchoolyearsResponse {
   }
 }
 
-message GetSchoolyearRequest {
-  string id = 1;
-}
+message GetSchoolyearsRequest { repeated string ids = 1; }
 
-message GetSchoolyearResponse {
-  Schoolyear schoolyear = 1;
-}
+message GetSchoolyearsResponse { repeated Schoolyear schoolyears = 1; }
 
-message BatchGetSchoolyearsRequest {
-  repeated string ids = 1;
-}
+message CreateSchoolyearRequest { Schoolyear schoolyear = 1; }
 
-message BatchGetSchoolyearsResponse {
-  repeated Schoolyear schoolyears = 1;
-}
-
-message CreateSchoolyearRequest {
-  Schoolyear data = 1;
-}
-
-message CreateSchoolyearResponse {
-  Schoolyear schoolyear = 1;
-}
+message CreateSchoolyearResponse { Schoolyear schoolyear = 1; }
 
 message UpdateSchoolyearRequest {
   string id = 1;
-  Schoolyear data = 2;
+  Schoolyear schoolyear = 2;
   google.protobuf.FieldMask update_mask = 3;
   optional string if_rev = 4;
 }
 
-message UpdateSchoolyearResponse {
-  Schoolyear schoolyear = 1;
-}
-
-message UpdateSchoolyearsWhereRequest {
-  string filter = 1;
-  Schoolyear data = 2;
-  google.protobuf.FieldMask update_mask = 3;
-}
-
-message UpdateSchoolyearsWhereResponse {
-  repeated Schoolyear schoolyears = 1;
-}
+message UpdateSchoolyearResponse { Schoolyear schoolyear = 1; }
 
 message DeleteSchoolyearRequest {
   string id = 1;
   optional string if_rev = 2;
 }
 
-message DeleteSchoolyearResponse {
-  Schoolyear schoolyear = 1;
-}
-
-message DeleteSchoolyearsWhereRequest {
-  string filter = 1;
-}
-
-message DeleteSchoolyearsWhereResponse {
-  repeated Schoolyear schoolyears = 1;
-}
+message DeleteSchoolyearResponse { Schoolyear schoolyear = 1; }

@@ -8,19 +8,13 @@ import "google/protobuf/field_mask.proto";
 service AccountService {
   rpc ListAccounts(ListAccountsRequest) returns (ListAccountsResponse);
 
-  rpc GetAccount(GetAccountRequest) returns (GetAccountResponse);
-
-  rpc BatchGetAccounts(BatchGetAccountsRequest) returns (BatchGetAccountsResponse);
+  rpc GetAccounts(GetAccountsRequest) returns (GetAccountsResponse);
 
   rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);
 
   rpc UpdateAccount(UpdateAccountRequest) returns (UpdateAccountResponse);
 
-  rpc UpdateAccountsWhere(UpdateAccountsWhereRequest) returns (UpdateAccountsWhereResponse);
-
   rpc DeleteAccount(DeleteAccountRequest) returns (DeleteAccountResponse);
-
-  rpc DeleteAccountsWhere(DeleteAccountsWhereRequest) returns (DeleteAccountsWhereResponse);
 }
 
 message ListAccountsRequest {
@@ -43,65 +37,29 @@ message ListAccountsResponse {
   }
 }
 
-message GetAccountRequest {
-  string id = 1;
-}
+message GetAccountsRequest { repeated string ids = 1; }
 
-message GetAccountResponse {
-  Account account = 1;
-}
-
-message BatchGetAccountsRequest {
-  repeated string ids = 1;
-}
-
-message BatchGetAccountsResponse {
-  repeated Account accounts = 1;
-}
+message GetAccountsResponse { repeated Account accounts = 1; }
 
 message CreateAccountRequest {
-  Account data = 1;
+  Account account = 1;
   optional string if_person_rev = 2;
 }
 
-message CreateAccountResponse {
-  Account account = 1;
-}
+message CreateAccountResponse { Account account = 1; }
 
 message UpdateAccountRequest {
   string id = 1;
-  Account data = 2;
+  Account account = 2;
   google.protobuf.FieldMask update_mask = 3;
   optional string if_rev = 4;
 }
 
-message UpdateAccountResponse {
-  Account account = 1;
-}
-
-message UpdateAccountsWhereRequest {
-  string filter = 1;
-  Account data = 2;
-  google.protobuf.FieldMask update_mask = 3;
-}
-
-message UpdateAccountsWhereResponse {
-  repeated Account accounts = 1;
-}
+message UpdateAccountResponse { Account account = 1; }
 
 message DeleteAccountRequest {
   string id = 1;
   optional string if_rev = 2;
 }
 
-message DeleteAccountResponse {
-  Account account = 1;
-}
-
-message DeleteAccountsWhereRequest {
-  string filter = 1;
-}
-
-message DeleteAccountsWhereResponse {
-  repeated Account accounts = 1;
-}
+message DeleteAccountResponse { Account account = 1; }
