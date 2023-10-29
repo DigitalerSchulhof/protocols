@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package dsh.services.account.v1;
+package dsh.proto.services.account.v1;
 
 import "dsh/services/account/v1/resources.proto";
 import "google/protobuf/field_mask.proto";

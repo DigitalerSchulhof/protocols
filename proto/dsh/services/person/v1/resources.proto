@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package dsh.services.person.v1;
+package dsh.proto.services.person.v1;
 
 import "google/protobuf/timestamp.proto";
 
